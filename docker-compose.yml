@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mardb:
+    image: mysql:8.2.0
+    container_name: mardb
+    environment:
+      MYSQL_ROOT_PASSWORD: password123
+      MYSQL_DATABASE: mar
+    ports:
+      - "3306:3306"
+    volumes:
+      - mardb_data:/var/lib/mysql
+
+volumes:
+  mardb_data:
