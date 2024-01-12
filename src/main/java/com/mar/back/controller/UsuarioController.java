@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.mar.back.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
+@CrossOrigin
 public class UsuarioController {
 
     @Autowired
@@ -30,8 +32,9 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario create(@RequestBody Usuario usuario) {
-        return usuarioService.create(usuario);
+    public ResponseEntity<String> create(@RequestBody Usuario usuario) {
+        usuarioService.create(usuario);
+        return ResponseEntity.status(201).body("{'message': 'Usuário criado com sucesso!'}");
     }
 
     @PutMapping("/{id}")

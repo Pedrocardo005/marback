@@ -26,7 +26,7 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestBody Login login) throws Exception {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                login.login(), login.password());
+                login.email(), login.password());
 
         try {
             Authentication authentication = this.authenticationManager

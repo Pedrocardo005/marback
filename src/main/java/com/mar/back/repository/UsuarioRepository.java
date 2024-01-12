@@ -6,6 +6,6 @@ import com.mar.back.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    Usuario findByLogin(String login);
+    Usuario findByEmail(String email);
 
 }
