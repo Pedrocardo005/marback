@@ -1,9 +1,13 @@
 package com.mar.back.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,18 +28,22 @@ public class AuthController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public String login(@RequestBody Login login) throws Exception {
+    @CrossOrigin
+    public Object login(@RequestBody Login login) throws Exception {
+        Map<String, Object> object = new HashMap<>();
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                 login.email(), login.password());
-
+        
         try {
             Authentication authentication = this.authenticationManager
                     .authenticate(usernamePasswordAuthenticationToken);
             Usuario usuario = (Usuario) authentication.getPrincipal();
-            return tokenService.gerarToken(usuario);
+            
+            object.put("token", tokenService.gerarToken(usuario));
         } catch (Exception e) {
             System.out.println("Erro " + e.getMessage());
+            object.put("erro", "Ocorreu algum erro interno no servidor");
         }
-        return "123";
+        return object;
     }
 }

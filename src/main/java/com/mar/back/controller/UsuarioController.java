@@ -1,6 +1,8 @@
 package com.mar.back.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mar.back.model.Usuario;
@@ -32,9 +35,12 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody Usuario usuario) {
+    @ResponseBody
+    public ResponseEntity<Object> create(@RequestBody Usuario usuario) {
+        Map<String, Object> object = new HashMap<>();
         usuarioService.create(usuario);
-        return ResponseEntity.status(201).body("{'message': 'Usuário criado com sucesso!'}");
+        object.put("message", "Usuário criado com sucesso!");
+        return ResponseEntity.status(201).body(object);
     }
 
     @PutMapping("/{id}")
