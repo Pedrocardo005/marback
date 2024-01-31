@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.mar.back.exceptions.UserAlreadyCreated;
 import com.mar.back.model.Usuario;
 import com.mar.back.repository.UsuarioRepository;
 
@@ -20,16 +21,14 @@ public class UsuarioService {
         return (ArrayList<Usuario>) usuarioRepository.findAll();
     }
 
-    public Usuario create(Usuario usuario) throws Exception {
+    public Usuario create(Usuario usuario) throws UserAlreadyCreated {
         String encodedPassword = new BCryptPasswordEncoder().encode(usuario.getPassword());
-        // Pegar o usuário que já existe com um optional, pois checará se existe.
         Optional<Usuario> opUser = usuarioRepository.findByEmail(usuario.getEmail());
         if (opUser.isEmpty()) {
             usuario.setPassword(encodedPassword);
             return usuarioRepository.save(usuario);
         } else {
-            // Criar uma excessão só para usuários já cadastrados
-            throw new Exception("Usuário já cadastrado");
+            throw new UserAlreadyCreated("Usuário já cadastrado!");
         }
         
     }

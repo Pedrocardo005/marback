@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mar.back.exceptions.UserAlreadyCreated;
 import com.mar.back.model.Usuario;
 import com.mar.back.service.UsuarioService;
 
@@ -42,7 +43,7 @@ public class UsuarioController {
             usuarioService.create(usuario);
             object.put("message", "Usuário criado com sucesso!");
             return ResponseEntity.status(201).body(object);
-        } catch (Exception e) {
+        } catch (UserAlreadyCreated e) {
             object.put("message", "Usuário já cadastrado");
             return ResponseEntity.status(500).body(object);
         }
