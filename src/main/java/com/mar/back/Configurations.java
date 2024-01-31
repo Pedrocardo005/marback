@@ -44,6 +44,8 @@ public class Configurations {
                         .permitAll()
                         .requestMatchers("/usuarios")
                         .permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**")
+                        .permitAll()
                         .anyRequest()
                         .authenticated())
                 .addFilterBefore(filterToken, UsernamePasswordAuthenticationFilter.class)
