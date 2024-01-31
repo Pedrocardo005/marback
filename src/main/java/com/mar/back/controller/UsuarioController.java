@@ -38,9 +38,15 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<Object> create(@RequestBody Usuario usuario) {
         Map<String, Object> object = new HashMap<>();
-        usuarioService.create(usuario);
-        object.put("message", "Usuário criado com sucesso!");
-        return ResponseEntity.status(201).body(object);
+        try {
+            usuarioService.create(usuario);
+            object.put("message", "Usuário criado com sucesso!");
+            return ResponseEntity.status(201).body(object);
+        } catch (Exception e) {
+            object.put("message", "Usuário já cadastrado");
+            return ResponseEntity.status(500).body(object);
+        }
+        
     }
 
     @PutMapping("/{id}")

@@ -1,6 +1,7 @@
 package com.mar.back;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.mar.back.model.Usuario;
 import com.mar.back.repository.UsuarioRepository;
 import com.mar.back.service.TokenService;
 
@@ -37,7 +39,9 @@ public class FilterToken extends OncePerRequestFilter {
             token = authorizationHeader.replace("Bearer ", "");
             String subject = this.tokenService.getSubject(token);
 
-            var usuario = this.usuarioRepository.findByEmail(subject);
+            Optional<Usuario> opUser = this.usuarioRepository.findByEmail(subject);
+
+            Usuario usuario = opUser.get();
 
             var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
 

@@ -20,10 +20,18 @@ public class UsuarioService {
         return (ArrayList<Usuario>) usuarioRepository.findAll();
     }
 
-    public Usuario create(Usuario usuario) {
+    public Usuario create(Usuario usuario) throws Exception {
         String encodedPassword = new BCryptPasswordEncoder().encode(usuario.getPassword());
-        usuario.setPassword(encodedPassword);
-        return usuarioRepository.save(usuario);
+        // Pegar o usuário que já existe com um optional, pois checará se existe.
+        Optional<Usuario> opUser = usuarioRepository.findByEmail(usuario.getEmail());
+        if (opUser.isEmpty()) {
+            usuario.setPassword(encodedPassword);
+            return usuarioRepository.save(usuario);
+        } else {
+            // Criar uma excessão só para usuários já cadastrados
+            throw new Exception("Usuário já cadastrado");
+        }
+        
     }
 
     public Usuario update(Usuario usuario, Long id) throws Exception {
