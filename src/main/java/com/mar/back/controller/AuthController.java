@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,7 +31,7 @@ public class AuthController {
 
     @PostMapping("/login")
     @CrossOrigin
-    public Object login(@RequestBody Login login) throws Exception {
+    public ResponseEntity<Object> login(@RequestBody Login login) throws Exception {
         Map<String, Object> object = new HashMap<>();
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                 login.email(), login.password());
@@ -40,10 +42,12 @@ public class AuthController {
             Usuario usuario = (Usuario) authentication.getPrincipal();
             
             object.put("token", tokenService.gerarToken(usuario));
+            return new ResponseEntity<Object>(object, HttpStatus.ACCEPTED);
         } catch (Exception e) {
             System.out.println("Erro " + e.getMessage());
             object.put("erro", "Ocorreu algum erro interno no servidor");
+            return new ResponseEntity<Object>(object, HttpStatus.BAD_REQUEST);
         }
-        return object;
+        
     }
 }
