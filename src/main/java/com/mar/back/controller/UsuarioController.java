@@ -22,6 +22,12 @@ import com.mar.back.exceptions.UserAlreadyCreated;
 import com.mar.back.model.Usuario;
 import com.mar.back.service.UsuarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin
@@ -36,7 +42,17 @@ public class UsuarioController {
     }
 
     @PostMapping
-    @ResponseBody
+    @Operation(summary = "Cadastra um usuário")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Usuário criado",
+            content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class))
+            }),
+        @ApiResponse(responseCode = "500", description = "Usuário já cadastrado",
+            content = {
+                @Content
+            })
+    })
     public ResponseEntity<Object> create(@RequestBody Usuario usuario) {
         Map<String, Object> object = new HashMap<>();
         try {
