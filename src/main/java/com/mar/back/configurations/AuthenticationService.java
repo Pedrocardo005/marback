@@ -1,4 +1,4 @@
-package com.mar.back.service;
+package com.mar.back.configurations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

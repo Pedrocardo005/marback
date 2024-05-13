@@ -1,4 +1,4 @@
-package com.mar.back;
+package com.mar.back.jwt;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -11,7 +11,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.mar.back.model.Usuario;
 import com.mar.back.repository.UsuarioRepository;
-import com.mar.back.service.TokenService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
