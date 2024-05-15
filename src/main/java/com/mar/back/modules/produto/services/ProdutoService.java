@@ -1,4 +1,4 @@
-package com.mar.back.service;
+package com.mar.back.modules.produto.services;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mar.back.model.Produto;
-import com.mar.back.repository.ProdutoRepository;
+import com.mar.back.modules.produto.models.Produto;
+import com.mar.back.modules.produto.repositories.ProdutoRepository;
 
 @Service
 public class ProdutoService {

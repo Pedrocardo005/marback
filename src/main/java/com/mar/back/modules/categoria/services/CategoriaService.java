@@ -1,4 +1,4 @@
-package com.mar.back.service;
+package com.mar.back.modules.categoria.services;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mar.back.model.Categoria;
-import com.mar.back.repository.CategoriaRepository;
+import com.mar.back.modules.categoria.models.Categoria;
+import com.mar.back.modules.categoria.repositories.CategoriaRepository;
 
 @Service
 public class CategoriaService {

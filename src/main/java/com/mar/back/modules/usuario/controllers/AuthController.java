@@ -1,4 +1,4 @@
-package com.mar.back.controller;
+package com.mar.back.modules.usuario.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mar.back.dto.Login;
 import com.mar.back.jwt.TokenService;
-import com.mar.back.model.Usuario;
+import com.mar.back.modules.usuario.dtos.Login;
+import com.mar.back.modules.usuario.models.Usuario;
 
 @RestController
 @RequestMapping

@@ -1,6 +1,7 @@
-package com.mar.back.model;
+package com.mar.back.modules.produto.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mar.back.modules.categoria.models.Categoria;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

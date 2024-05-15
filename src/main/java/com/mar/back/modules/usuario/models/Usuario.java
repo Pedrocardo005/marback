@@ -1,4 +1,4 @@
-package com.mar.back.model;
+package com.mar.back.modules.usuario.models;
 
 import java.util.Collection;
 import java.util.List;

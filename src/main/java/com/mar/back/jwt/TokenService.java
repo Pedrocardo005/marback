@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.mar.back.model.Usuario;
+import com.mar.back.modules.usuario.models.Usuario;
 
 @Service
 public class TokenService {

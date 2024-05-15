@@ -1,4 +1,4 @@
-package com.mar.back.exceptions;
+package com.mar.back.modules.usuario.exceptions;
 
 public class UserAlreadyCreated extends Exception {
     public UserAlreadyCreated() {

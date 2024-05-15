@@ -1,4 +1,4 @@
-package com.mar.back.controller;
+package com.mar.back.modules.produto.controllers;
 
 import java.util.ArrayList;
 
@@ -12,42 +12,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mar.back.model.Categoria;
-import com.mar.back.service.CategoriaService;
+import com.mar.back.modules.produto.models.Produto;
+import com.mar.back.modules.produto.services.ProdutoService;
 
+@RequestMapping("/produtos")
 @RestController
-@RequestMapping("/categorias")
-public class CategoriaController {
+public class ProdutoController {
 
     @Autowired
-    private CategoriaService categoriaService;
+    private ProdutoService produtoService;
 
     @GetMapping
-    public ArrayList<Categoria> findAll() {
-        return categoriaService.findAll();
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
+    public ArrayList<Produto> findAll() {
+        return produtoService.findAll();
     }
 
     @PostMapping
-    public Categoria create(@RequestBody Categoria categoria) {
-        return categoriaService.create(categoria);
+    public Produto create(@RequestBody Produto produto) {
+        return produtoService.create(produto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody Categoria categoria) {
+    public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto entity) {
         try {
-            Categoria categoria2 = categoriaService.update(categoria, id);
-            return new ResponseEntity<Categoria>(categoria2, HttpStatus.OK);
+            Produto produto = produtoService.update(entity, id);
+            return new ResponseEntity<Produto>(produto, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<Categoria>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Produto>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         try {
-            categoriaService.delete(id);
+            produtoService.delete(id);
             return new ResponseEntity<String>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

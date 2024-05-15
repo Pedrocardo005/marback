@@ -1,4 +1,4 @@
-package com.mar.back.controller;
+package com.mar.back.modules.usuario.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mar.back.exceptions.UserAlreadyCreated;
-import com.mar.back.model.Usuario;
-import com.mar.back.service.UsuarioService;
+import com.mar.back.modules.usuario.exceptions.UserAlreadyCreated;
+import com.mar.back.modules.usuario.models.Usuario;
+import com.mar.back.modules.usuario.services.UsuarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

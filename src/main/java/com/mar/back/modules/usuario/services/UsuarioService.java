@@ -1,4 +1,4 @@
-package com.mar.back.service;
+package com.mar.back.modules.usuario.services;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mar.back.exceptions.UserAlreadyCreated;
-import com.mar.back.model.Usuario;
-import com.mar.back.repository.UsuarioRepository;
+import com.mar.back.modules.usuario.exceptions.UserAlreadyCreated;
+import com.mar.back.modules.usuario.models.Usuario;
+import com.mar.back.modules.usuario.repositories.UsuarioRepository;
 
 @Service
 public class UsuarioService {
