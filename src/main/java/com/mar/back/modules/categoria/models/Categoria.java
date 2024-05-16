@@ -32,4 +32,8 @@ public class Categoria {
     public Categoria(Long id) {
         this.id = id;
     }
+
+    public Categoria(String nome) {
+        this.nome = nome;
+    }
 }

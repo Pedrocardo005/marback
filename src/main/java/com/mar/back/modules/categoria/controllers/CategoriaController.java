@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mar.back.modules.categoria.dtos.CategoriaPostDTO;
 import com.mar.back.modules.categoria.models.Categoria;
 import com.mar.back.modules.categoria.services.CategoriaService;
 
@@ -30,7 +31,7 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public Categoria create(@RequestBody Categoria categoria) {
+    public Categoria create(@RequestBody CategoriaPostDTO categoria) {
         return categoriaService.create(categoria);
     }
 

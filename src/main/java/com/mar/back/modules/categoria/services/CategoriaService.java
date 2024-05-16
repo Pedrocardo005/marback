@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mar.back.modules.categoria.dtos.CategoriaPostDTO;
 import com.mar.back.modules.categoria.models.Categoria;
 import com.mar.back.modules.categoria.repositories.CategoriaRepository;
 
@@ -19,7 +20,8 @@ public class CategoriaService {
         return (ArrayList<Categoria>) categoriaRepository.findAll();
     }
 
-    public Categoria create(Categoria categoria) {
+    public Categoria create(CategoriaPostDTO categoriaDto) {
+        Categoria categoria = new Categoria(categoriaDto.nome());
         return categoriaRepository.save(categoria);
     }
 
