@@ -36,6 +36,10 @@ public class Usuario implements UserDetails {
     @NotBlank
     private String password;
 
+    public Usuario(String email) {
+        this.email = email;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Para lidar com autorização, administrador, etc...
