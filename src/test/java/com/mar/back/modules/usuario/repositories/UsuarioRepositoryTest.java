@@ -23,7 +23,7 @@ public class UsuarioRepositoryTest {
     
     @Test
     @DisplayName("Should get Usuario sucessfully from DB")
-    void findUsuarioByEmail() {
+    void findUsuarioByEmailCase1() {
         Usuario usuario = new Usuario("pedro@pedro.com");
         this.createUsuario(usuario);
         this.usuarioRepository.save(usuario);
@@ -31,6 +31,14 @@ public class UsuarioRepositoryTest {
         Optional<Usuario> result = this.usuarioRepository.findByEmail("pedro@pedro.com");
 
         assertThat(result.isPresent()).isTrue();
+    }
+
+    @Test
+    @DisplayName("Should not get Usuario from DB when Usuario not exists")
+    void findUsuarioByEmailCase2() {
+        Optional<Usuario> result = this.usuarioRepository.findByEmail("pedro@pedro.com");
+
+        assertThat(result.isEmpty()).isTrue();
     }
 
     private Usuario createUsuario(Usuario usuario) {
