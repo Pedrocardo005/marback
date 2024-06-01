@@ -40,6 +40,11 @@ public class Usuario implements UserDetails {
         this.email = email;
     }
 
+    public Usuario(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Para lidar com autorização, administrador, etc...
