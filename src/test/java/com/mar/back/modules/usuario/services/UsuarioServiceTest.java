@@ -2,10 +2,15 @@ package com.mar.back.modules.usuario.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -75,15 +80,30 @@ public class UsuarioServiceTest {
         
         Usuario result = usuarioService.create(usuario);
 
-
         assertNotNull(result);
         assertEquals("usuario@gmail.com", usuario.getEmail());
         assertNotNull(usuario.getPassword());
     }
 
     @Test
-    void testCreateCase2() {
+    @DisplayName("Should be return an UserAlreadyCreated exception when create two equals users with same email")
+    void testCreateCase2() throws UserAlreadyCreated {
+        Usuario usuario = new Usuario("usuario1@gmail.com", "12345678");
+        Usuario usuario2 = new Usuario("usuario@gmail.com", "12345678");
         
+        when(usuarioRepository.findByEmail("usuario1@gmail.com")).thenReturn(Optional.empty());
+        when(usuarioRepository.findByEmail("usuario@gmail.com")).thenReturn(Optional.of(usuario2));
+        when(usuarioRepository.save(any(Usuario.class))).thenReturn(new Usuario());
+        
+        usuarioService.create(usuario);
+        Exception exception = assertThrows(UserAlreadyCreated.class, () ->  {
+            usuarioService.create(usuario2);
+        });
+
+        String expectedMessage = "Usuário já cadastrado!";
+        String currentMessage = exception.getMessage();
+
+        assertTrue(currentMessage.contains(expectedMessage));
     }
 
     @Test
