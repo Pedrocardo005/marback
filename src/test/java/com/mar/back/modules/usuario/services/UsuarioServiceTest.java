@@ -1,5 +1,6 @@
 package com.mar.back.modules.usuario.services;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -107,13 +108,14 @@ public class UsuarioServiceTest {
     }
 
     @Test
-    void testDelete() {
+    @DisplayName("Should be deleted an usuario when pass your id")
+    void testDeleteCase1() throws Exception {
+        Usuario usuario = new Usuario("usuario1@gmail.com", "12345678");
+        usuario.setId(1L);
 
-    }
+        when(usuarioRepository.findById(1L)).thenReturn(Optional.of(usuario));
 
-    @Test
-    void testFindAll() {
-
+        assertDoesNotThrow(() -> usuarioService.delete(1L));
     }
 
     @Test
