@@ -119,6 +119,22 @@ public class UsuarioServiceTest {
     }
 
     @Test
+    @DisplayName("Should not be deleted an usuario when pass id")
+    void testDeleteCase2() throws Exception {
+        Usuario usuario = new Usuario("usuario1@gmail.com", "12345678");
+        usuario.setId(1L);
+
+        when(usuarioRepository.findById(1L)).thenReturn(Optional.empty());
+
+        Exception exception = assertThrows( Exception.class, () -> usuarioService.delete(1L));
+
+        String expectedMessage = "Não encontrado";
+        String currentMessage = exception.getMessage();
+
+        assertTrue(currentMessage.contains(expectedMessage));
+    }
+
+    @Test
     void testUpdate() {
 
     }
