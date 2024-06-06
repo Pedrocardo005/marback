@@ -135,7 +135,13 @@ public class UsuarioServiceTest {
     }
 
     @Test
-    void testUpdate() {
+    @DisplayName("Should be update an usuario when pass id")
+    void testUpdateCase1() {
+        Usuario usuario = new Usuario("usuario1@gmail.com", "12345678");
+        usuario.setId(1L);
 
+        when(usuarioRepository.findById(1L)).thenReturn(Optional.of(usuario));
+
+        //Usuario usuario = usuarioService.update(new Usuario(), null)
     }
 }
